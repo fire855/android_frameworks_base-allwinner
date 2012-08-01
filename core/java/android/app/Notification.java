@@ -1740,6 +1740,9 @@ public class Notification implements Parcelable
             return this;
         }
 
+        /**
+         * Provide the bitmap to be used as the payload for the BigPicture notification.
+         */
         public BigPictureStyle bigPicture(Bitmap b) {
             mPicture = b;
             return this;
@@ -1818,6 +1821,10 @@ public class Notification implements Parcelable
             return this;
         }
 
+        /**
+         * Provide the longer text to be displayed in the big form of the
+         * template in place of the content text.
+         */
         public BigTextStyle bigText(CharSequence cs) {
             mBigText = cs;
             return this;
@@ -1898,6 +1905,9 @@ public class Notification implements Parcelable
             return this;
         }
 
+        /**
+         * Append a line to the digest section of the Inbox notification.
+         */
         public InboxStyle addLine(CharSequence cs) {
             mTexts.add(cs);
             return this;
