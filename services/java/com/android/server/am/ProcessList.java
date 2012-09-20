@@ -95,14 +95,12 @@ class ProcessList {
 
     // The minimum number of hidden apps we want to be able to keep around,
     // without empty apps being able to push them out of memory.
-//    static final int MIN_HIDDEN_APPS = 2;
-    static final int MIN_HIDDEN_APPS = 1;
+    static final int MIN_HIDDEN_APPS = 2;
 
     // The maximum number of hidden processes we will keep around before
     // killing them; this is just a control to not let us go too crazy with
     // keeping around processes on devices with large amounts of RAM.
-//    static final int MAX_HIDDEN_APPS = 15;
-    static final int MAX_HIDDEN_APPS = 4;
+    static final int MAX_HIDDEN_APPS = 15;
 
     // We put empty content processes after any hidden processes that have
     // been idle for less than 15 seconds.
