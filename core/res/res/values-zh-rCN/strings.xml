@@ -1412,6 +1412,7 @@
     <string name="weather_45">雷阵雨</string>
     <string name="weather_46">阵雪</string>
     <string name="weather_47">局部雷阵雨</string>
+
     <!-- Forecast unavailable -->
     <string name="weather_3200"></string>
 

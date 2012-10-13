@@ -1270,14 +1270,14 @@ public class WifiStateMachine extends StateMachine {
            ip settings */
         InterfaceConfiguration ifcg = null;
         try {
-            ifcg = mNwService.getInterfaceConfig(mInterfaceName);
+            ifcg = mNwService.getInterfaceConfig(mTetherInterfaceName);
             if (ifcg != null) {
                 ifcg.setLinkAddress(
                         new LinkAddress(NetworkUtils.numericToInetAddress("0.0.0.0"), 0));
-                mNwService.setInterfaceConfig(mInterfaceName, ifcg);
+                mNwService.setInterfaceConfig(mTetherInterfaceName, ifcg);
             }
         } catch (Exception e) {
-            loge("Error resetting interface " + mInterfaceName + ", :" + e);
+            loge("Error resetting interface " + mTetherInterfaceName + ", :" + e);
         }
 
         if (mCm.untether(mTetherInterfaceName) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
@@ -2030,18 +2030,22 @@ public class WifiStateMachine extends StateMachine {
              */
             new Thread(new Runnable() {
                 public void run() {
+		    boolean ret = false;
+
                     mWakeLock.acquire();
                     //enabling state
                     switch(message.arg1) {
                         case WIFI_STATE_ENABLING:
                             setWifiState(WIFI_STATE_ENABLING);
+			    ret = mWifiNative.loadDriver();
                             break;
                         case WIFI_AP_STATE_ENABLING:
                             setWifiApState(WIFI_AP_STATE_ENABLING);
+			    ret = mWifiNative.loadHotspotDriver();
                             break;
                     }
 
-                    if(mWifiNative.loadDriver()) {
+                    if(ret) {
                         if (DBG) log("Driver load successful");
                         sendMessage(CMD_LOAD_DRIVER_SUCCESS);
                     } else {
@@ -2156,9 +2160,21 @@ public class WifiStateMachine extends StateMachine {
             message.copyFrom(getCurrentMessage());
             new Thread(new Runnable() {
                 public void run() {
+		    boolean ret = false;
+
                     if (DBG) log(getName() + message.toString() + "\n");
                     mWakeLock.acquire();
-                    if(mWifiNative.unloadDriver()) {
+		    switch(message.arg1) {
+                       case WIFI_STATE_DISABLED:
+                       case WIFI_STATE_UNKNOWN:
+		           ret = mWifiNative.unloadDriver();
+                           break;
+                       case WIFI_AP_STATE_DISABLED:
+                       case WIFI_AP_STATE_FAILED:
+		           ret = mWifiNative.unloadHotspotDriver();
+                           break;
+		    }
+                    if(ret) {
                         if (DBG) log("Driver unload successful");
                         sendMessage(CMD_UNLOAD_DRIVER_SUCCESS);
 
