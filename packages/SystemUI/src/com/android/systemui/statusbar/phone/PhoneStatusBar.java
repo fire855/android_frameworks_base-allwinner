@@ -308,7 +308,7 @@ public class PhoneStatusBar extends BaseStatusBar {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SCREEN_BRIGHTNESS_MODE), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.ON_SCREEN_BUTTONS), false, this);
+                    Settings.System.TABLET_UI), false, this);
             update();
         }
 
@@ -320,7 +320,7 @@ public class PhoneStatusBar extends BaseStatusBar {
         public void update() {
             ContentResolver resolver = mContext.getContentResolver();
             mHasNavigationBar = (Settings.System.getInt(resolver,
-                    Settings.System.ON_SCREEN_BUTTONS, 0) == 1);
+                    Settings.System.TABLET_UI, 1) == 1);
             mAutoBrightness = Settings.System.getInt(resolver,
                     Settings.System.SCREEN_BRIGHTNESS_MODE, 0) ==
                     Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;

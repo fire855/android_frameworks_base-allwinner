@@ -2582,19 +2582,7 @@ public final class Settings {
          * @hide
          */
         public static final String VOLUME_WAKE_SCREEN = "volume_wake_screen";
-
-        /**
-         * Whether to enable On Screen Buttons, the value is boolean.
-         * @hide
-         */
-        public static final String ON_SCREEN_BUTTONS = "on_screen_buttons";
-
-        /**
-         * Whether to change height of On screen Buttons.
-         * @hide
-         */
-        public static final String ON_SCREEN_BUTTONS_HEIGHT = "on_screen_buttons_height";
-
+ 
         /**
          * Whether or not volume button music controls should be enabled to seek media tracks
          * @hide
@@ -2943,6 +2931,11 @@ public final class Settings {
           * @hide
           */
          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+
+	 /**
+          * Tablet UI settings.
+          */
+        public static final String TABLET_UI = "tablet_ui";
 
         /**
          * Show the pending notification counts as overlays on the status bar
