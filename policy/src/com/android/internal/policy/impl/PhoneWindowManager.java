@@ -372,7 +372,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mEnableShiftMenuBugReports = false;
 
     boolean mHeadless;
-    boolean mDisablePhabletUi;
     boolean mSafeMode;
     WindowState mStatusBar = null;
     boolean mHasSystemNavBar;
@@ -1140,7 +1139,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         mWindowManager = windowManager;
         mWindowManagerFuncs = windowManagerFuncs;
         mPowerManager = powerManager;
-	mDisablePhabletUi = "1".equals(SystemProperties.get("ro.disable_phablet_ui", "0"));
         mHeadless = "1".equals(SystemProperties.get("ro.config.headless", "0"));
         if (!mHeadless) {
             // don't create KeyguardViewMediator if headless
@@ -1274,7 +1272,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     public void setInitialDisplaySize(Display display, int width, int height) {
         mDisplay = display;
-        ContentResolver resolver = mContext.getContentResolver();
+
         int shortSize, longSize;
         if (width > height) {
             shortSize = height;
@@ -1311,6 +1309,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 com.android.internal.R.dimen.status_bar_height);
 
         // Height of the navigation bar when presented horizontally at bottom
+        mNavigationBarHeightForRotation[mPortraitRotation] =
+        mNavigationBarHeightForRotation[mUpsideDownRotation] =
+                mContext.getResources().getDimensionPixelSize(
+                        com.android.internal.R.dimen.navigation_bar_height);
         mNavigationBarHeightForRotation[mLandscapeRotation] =
         mNavigationBarHeightForRotation[mSeascapeRotation] =
                 mContext.getResources().getDimensionPixelSize(
