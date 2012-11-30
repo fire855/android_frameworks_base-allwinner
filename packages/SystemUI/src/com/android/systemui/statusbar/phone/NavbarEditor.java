@@ -173,7 +173,7 @@ public class NavbarEditor implements OnTouchListener {
             android.view.Display display = wm.getDefaultDisplay();
             int shortSize = Math.min(display.getRawHeight(), display.getRawWidth());
             int shortSizeDp = shortSize * DisplayMetrics.DENSITY_DEFAULT / DisplayMetrics.DENSITY_DEVICE;
-            if (shortSizeDp >= 600) {
+            if (shortSizeDp < 720 && shortSizeDp >= 600) {
                 mIsDeviceHybrid = true;
             } else {
                 mIsDeviceHybrid = false;

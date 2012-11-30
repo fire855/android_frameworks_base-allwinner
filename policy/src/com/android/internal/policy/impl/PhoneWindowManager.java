@@ -1340,15 +1340,19 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 		mHasSystemNavBar = false;
 		mNavigationBarCanMove = true;
 	    }
-        } else {
-            // "phone" UI with modifications for larger screens
+        } else if (shortSizeDp < 720) {
+            // 600-719dp: "phone" UI with modifications for larger screens
 	    if (Settings.System.getInt(mContext.getContentResolver(),Settings.System.TABLET_UI, 1) == 1) {
 		mHasSystemNavBar = true;
 	    } else {
 		mHasSystemNavBar = false;
 	    }
             mNavigationBarCanMove = false;
-        }
+        } else {
+            // 720dp: "tablet" UI with a single combined status & navigation bar
+            mHasSystemNavBar = true;
+            mNavigationBarCanMove = false;
+        }      
 
         if (!mHasSystemNavBar) {
             mHasNavigationBar = mContext.getResources().getBoolean(
