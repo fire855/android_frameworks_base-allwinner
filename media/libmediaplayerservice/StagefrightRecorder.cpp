@@ -841,8 +841,8 @@ status_t StagefrightRecorder::prepare() {
 		mpCedarXRecorder->setOutputFormat(mOutputFormat);
 
 		// location
-		mpCedarXRecorder->setParamGeoDataLatitude(mLatitudex10000);
-		mpCedarXRecorder->setParamGeoDataLongitude(mLongitudex10000);
+		//mpCedarXRecorder->setParamGeoDataLatitude(mLatitudex10000);
+		//mpCedarXRecorder->setParamGeoDataLongitude(mLongitudex10000);
 		
 		// lapse
 		mpCedarXRecorder->setParamTimeLapseEnable(mCaptureTimeLapse);

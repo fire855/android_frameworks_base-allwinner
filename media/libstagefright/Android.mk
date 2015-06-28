@@ -137,6 +137,7 @@ LOCAL_STATIC_LIBRARIES := \
         libstagefright_timedtext \
         libvpx \
         libstagefright_mpeg2ts \
+	libstagefright_httplive \
         libstagefright_id3 \
         libFLAC \
 
@@ -154,12 +155,12 @@ ifeq ($(BOARD_USES_PROPRIETARY_OMX),SAMSUNG)
 LOCAL_CFLAGS     += -DSAMSUNG_OMX
 endif
 
-ifeq ($(CEDARX_DEBUG_FRAMEWORK),Y)
-LOCAL_STATIC_LIBRARIES += libstagefright_httplive_opt
-else
-LOCAL_LDFLAGS += \
-	$(CEDARX_TOP)/../CedarAndroidLib/LIB_ICS_$(CEDARX_CHIP_VERSION)/libstagefright_httplive_opt.a
-endif
+#ifeq ($(CEDARX_DEBUG_FRAMEWORK),Y)
+#LOCAL_STATIC_LIBRARIES += libstagefright_httplive_opt
+#else
+#LOCAL_LDFLAGS += \
+#	$(CEDARX_TOP)/../CedarAndroidLib/LIB_ICS_$(CEDARX_CHIP_VERSION)/libstagefright_httplive_opt.a
+#endif
 
 ################################################################################
 
