@@ -1370,30 +1370,6 @@ android_media_MediaPlayer_getBdFolderPlayMode(JNIEnv *env, jobject thiz)
 }
 /* add by Gary. end   -----------------------------------}} */
 
-/*Begin (Modified by Michael. 2014.05.22)*/
-static jint android_media_MediaPlayer_getMediaPlayerList(JNIEnv *env, jobject thiz)
-{
-    return MediaPlayer::getMediaPlayerList();
-}
-
-static jint android_media_MediaPlayer_getMediaPlayerInfo(JNIEnv *env, jobject thiz,
-    jint mediaPlayerId, jobject info_obj)
-{
-    MediaPlayerInfo mediaPlayerInfo;
-    status_t rc = MediaPlayer::getMediaPlayerInfo(mediaPlayerId, &mediaPlayerInfo);
-    if (rc != NO_ERROR) {
-        jniThrowRuntimeException(env, "Fail to get mediaPlayer info");
-        return UNKNOWN_ERROR;
-    }
-       
-    env->SetIntField(info_obj, fields.width, mediaPlayerInfo.width);
-    env->SetIntField(info_obj, fields.height, mediaPlayerInfo.height);
-    env->SetIntField(info_obj, fields.codecType, mediaPlayerInfo.codecType);
-    env->SetIntField(info_obj, fields.playState, mediaPlayerInfo.playState);
-    return NO_ERROR;
-}
-/*End (Modified by Michael. 2014.05.22)*/
-
 /* add by lys. start {{----------------------------------- */
 /* 2013-4-22 */
 /* add two general interfaces for expansibility */
@@ -1858,10 +1834,6 @@ static JNINativeMethod gMethods[] = {
     /*add by eric_wang. Notify hdmi status.*/
     {"setHdmiState",     "(Z)I",                         		(void *)android_media_MediaPlayer_setHdmiState},
     /*End by eric_wang. Notify hdmi status.*/
-    /*Begin (Modified by Michael. 2014.05.22)*/
-    {"getMediaPlayerList",  "()I",                                             (void *)android_media_MediaPlayer_getMediaPlayerList},
-    {"getMediaPlayerInfo",  "(ILandroid/media/MediaPlayer$MediaPlayerInfo;)I", (void *)android_media_MediaPlayer_getMediaPlayerInfo},
-    /*End (Modified by Michael. 2014.05.22)*/
 };
 
 static const char* const kClassPathName = "android/media/MediaPlayer";
