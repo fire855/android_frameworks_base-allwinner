@@ -18,6 +18,7 @@ LOCAL_SRC_FILES:= \
     com_android_server_location_GpsLocationProvider.cpp \
     com_android_server_location_FlpHardwareProvider.cpp \
     com_android_server_connectivity_Vpn.cpp \
+    com_android_server_DisplayManagerServiceAw.cpp \
     onload.cpp
 
 LOCAL_C_INCLUDES += \
@@ -30,6 +31,7 @@ LOCAL_C_INCLUDES += \
     libcore/include/libsuspend \
 	$(call include-path-for, libhardware)/hardware \
 	$(call include-path-for, libhardware_legacy)/hardware_legacy \
+    device/softwinner/907/hardware/include \
 
 LOCAL_SHARED_LIBRARIES := \
     libandroid_runtime \

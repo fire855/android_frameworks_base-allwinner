@@ -353,6 +353,12 @@ class ServerThread {
                     !firstBoot, onlyCore);
             ServiceManager.addService(Context.WINDOW_SERVICE, wm);
             ServiceManager.addService(Context.INPUT_SERVICE, inputManager);
+			
+            if(SystemProperties.get("ro.display.switch").equals("1")) {
+                Slog.i(TAG, "Display Manager");
+                DisplayManagerServiceAw display_aw = new DisplayManagerServiceAw(context,power);
+                ServiceManager.addService(Context.DISPLAY_SERVICE_AW, display_aw);
+            }
 
             ActivityManagerService.self().setWindowManager(wm);
 

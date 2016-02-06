@@ -117,6 +117,7 @@ import android.view.DisplayAdjustments;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.WindowManagerImpl;
+import android.view.DisplayManagerAw;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.CaptioningManager;
 import android.view.inputmethod.InputMethodManager;
@@ -562,6 +563,11 @@ class ContextImpl extends Context {
                     IBinder b = ServiceManager.getService(WIFI_P2P_SERVICE);
                     IWifiP2pManager service = IWifiP2pManager.Stub.asInterface(b);
                     return new WifiP2pManager(service);
+                }});
+
+        registerService(DISPLAY_SERVICE_AW, new ServiceFetcher() {
+                public Object createService(ContextImpl ctx) {
+                    return new DisplayManagerAw();
                 }});
 
         registerService(WINDOW_SERVICE, new ServiceFetcher() {

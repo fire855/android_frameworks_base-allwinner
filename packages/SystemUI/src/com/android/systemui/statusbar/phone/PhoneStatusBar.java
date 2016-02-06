@@ -116,6 +116,7 @@ import com.android.systemui.statusbar.SignalClusterTextView;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.policy.BatteryController;
+import com.android.systemui.statusbar.policy.DisplayController;
 import com.android.systemui.statusbar.policy.BluetoothController;
 import com.android.systemui.statusbar.policy.Clock;
 import com.android.systemui.statusbar.policy.DateView;
@@ -203,6 +204,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     LocationController mLocationController;
     NetworkController mNetworkController;
     MSimNetworkController mMSimNetworkController;
+    DisplayController mDisplayController;
 
     int mNaturalBarHeight = -1;
     int mIconSize = -1;
@@ -546,6 +548,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mBatteryController = new BatteryController(mContext);
         mDockBatteryController = new DockBatteryController(mContext);
         mBluetoothController = new BluetoothController(mContext);
+        mDisplayController = new DisplayController(mContext);
 
         super.start(); // calls createAndAddWindows()
 
